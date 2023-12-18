@@ -1,40 +1,39 @@
-odoo.define("account_followup.open_invoice_editable", function (require) {
-	"use strict";
+/** @odoo-module **/
+debugger;
 
-	var ListRenderer = require("web.ListRenderer");
-	ListRenderer.include({
-		_renderRow: function (record) {
-			let row = this._super(record);
-			var self = this;
-			row.addClass('o_list_no_open');
-			// add click event
-			row.bind({
-				click: function (ev) {
-					if (record.context.py_onclick) {
-						var $target = $(ev.target);
-						if ($target[0].tagName === "BUTTON") {
-							return;
-						}
-						ev.preventDefault();
-						ev.stopPropagation();
-						self._rpc({
-							model: record.model,
-							method: record.context.py_onclick,
-							args: [record.data.id],
-							kwargs: {
-							},
-						}).then(function (action) {
-							console.log(action);
-							self.do_action(action, {
-								on_close: function () {
-									self.trigger_up('reload');
-								},
-							})
-						});
+import { registry } from "@web/core/registry";
+import { ListRenderer } from "@web/views/list/list_renderer";
+import { listView } from "@web/views/list/list_view";
+import { patch } from '@web/core/utils/patch';
+import { useService } from "@web/core/utils/hooks";
+
+patch(ListRenderer.prototype, "onCellClickedCustomizedTreeClickSetup", {
+	setup() {
+		this._super(...arguments);
+		this.rpc = useService('orm');
+		this.actionService = useService('action');
+	}
+})
+patch(ListRenderer.prototype, "onCellClickedCustomizedTreeClick", {
+	async onCellClicked(record, column, ev) {
+		const _super = this._super.bind(this);
+		var self = this;
+
+		if (record.context.py_onclick) {
+			var $target = $(ev.target);
+			let id = record.data.id;
+			let action = await this.rpc.call(record.resModel, record.context.py_onclick, [id], {context: record.context});
+
+			if (action) {
+				this.actionService.doAction(action, {
+					onClose: async (ev) => {
+						await record.model.root.load();
+						record.model.notify();
 					}
-				}
-			});
-			return row
-		},
-	});
+				});
+				return;
+			}
+		}
+		_super(...arguments);
+	}
 });

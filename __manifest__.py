@@ -1,12 +1,15 @@
 {
     "name": "web_customized_tree_click",
-    "version": "14.0.1.0",
+    "version": "16.0.1.0",
     "author": "Marc Wimmer (marc@zebroo.de)",
     "depends": ["web"],
-    "data": ["views/assets.xml"],
+    "data": [],
     "external_dependencies": {"python": [], "bin": []},
     "demo": [],
-    "qweb": [],
     "test": [],
     "application": False,
+    "assets": {
+        "web.assets_backend": ["customized_tree_click/static/src/js/list_renderer.js"],
+        "web.assets_qweb": [],
+    },
 }
