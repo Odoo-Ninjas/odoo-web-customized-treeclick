@@ -1,6 +1,4 @@
 /** @odoo-module **/
-debugger;
-
 import { registry } from "@web/core/registry";
 import { ListRenderer } from "@web/views/list/list_renderer";
 import { listView } from "@web/views/list/list_view";
@@ -25,6 +23,10 @@ patch(ListRenderer.prototype, "onCellClickedCustomizedTreeClick", {
 			let action = await this.rpc.call(record.resModel, record.context.py_onclick, [id], {context: record.context});
 
 			if (action) {
+				if (!('context' in action)) {
+					action.context = {}
+				}
+				action.context.py_onclick = '';  // important otherwise following tree clicks are broken
 				this.actionService.doAction(action, {
 					onClose: async (ev) => {
 						await record.model.root.load();
