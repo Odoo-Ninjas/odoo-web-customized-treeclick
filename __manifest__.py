@@ -9,7 +9,7 @@
     "test": [],
     "application": False,
     "assets": {
-        "web.assets_backend": ["customized_tree_click/static/src/js/list_renderer.js"],
+        "web.assets_backend": ["web_customized_tree_click/static/src/js/list_renderer.js"],
         "web.assets_qweb": [],
     },
 }
