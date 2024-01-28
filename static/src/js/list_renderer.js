@@ -1,4 +1,4 @@
-odoo.define("account_followup.open_invoice_editable", function (require) {
+odoo.define("web_customized_tree_click", function (require) {
 	"use strict";
 
 	var ListRenderer = require("web.ListRenderer");
