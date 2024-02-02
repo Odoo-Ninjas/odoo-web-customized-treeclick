@@ -9,4 +9,5 @@
     "qweb": [],
     "test": [],
     "application": False,
+    "css": [],
 }
