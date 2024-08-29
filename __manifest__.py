@@ -1,6 +1,6 @@
 {
     "name": "web_customized_tree_click",
-    "version": "16.0.1.0",
+    "version": "17.0.0.0",
     "author": "Marc Wimmer (marc@zebroo.de)",
     "depends": ["web"],
     "data": [],
