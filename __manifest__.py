@@ -6,8 +6,13 @@
     "data": [],
     "external_dependencies": {"python": [], "bin": []},
     "demo": [],
-    "qweb": [],
     "test": [],
     "application": False,
     "css": [],
+    "assets": {
+        "web.assets_backend": [
+            "web_customized_tree_click/static/src/js/list_renderer.js"
+        ],
+        "web.assets_qweb": [],
+    },
 }
