@@ -1,9 +1,9 @@
 {
     "name": "web_customized_tree_click",
-    "version": "14.0.1.0",
+    "version": "15.0.1.0",
     "author": "Marc Wimmer (marc@zebroo.de)",
     "depends": ["web"],
-    "data": ["views/assets.xml"],
+    "data": [],
     "external_dependencies": {"python": [], "bin": []},
     "demo": [],
     "qweb": [],
